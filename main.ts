@@ -23,12 +23,14 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(100)
     Duck.vx = 0
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    game.gameOver(false)
+})
+let projectile: Sprite = null
 let TopPipe_pos = 0
 let BottomPipe_pipe: Image = null
 let TopPipe_pipe: Image = null
 let PipeType = 0
-let projectile: Sprite = null
-let PointLine: Sprite = null
 let BirdSound = 0
 let Duck: Sprite = null
 Duck = sprites.create(img`
@@ -176,141 +178,12 @@ scene.setBackgroundImage(img`
 info.setScore(-1)
 game.showLongText("Jump with A. Steer with left or right. Press any button to start", DialogLayout.Bottom)
 game.onUpdate(function () {
-    PointLine = sprites.create(img`
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        2 
-        `, SpriteKind.system)
-    PointLine.setPosition(Duck.x, Duck.y)
-    PointLine.setFlag(SpriteFlag.Invisible, false)
-    if (PointLine.overlapsWith(projectile)) {
-        info.changeScoreBy(1)
-    }
-})
-game.onUpdate(function () {
     if (Duck.bottom > 130 || Duck.top < -10) {
         game.gameOver(false)
     }
 })
 game.onUpdateInterval(1500, function () {
-	
+    info.changeScoreBy(1)
 })
 game.onUpdateInterval(1500, function () {
     PipeType = randint(0, 2)
