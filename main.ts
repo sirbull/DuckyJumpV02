@@ -184,6 +184,7 @@ game.onUpdate(function () {
 })
 game.onUpdateInterval(1500, function () {
     info.changeScoreBy(1)
+    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.InBackground)
 })
 game.onUpdateInterval(1500, function () {
     PipeType = randint(0, 2)
